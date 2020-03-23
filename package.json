@@ -1,0 +1,44 @@
+{
+  "name": "test-server-nodejs",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Sviatoslav Fomin <slava.v.fomin@gmail.com>",
+  "repository": "https://github.com/slava-ff/test-server-nodejs.git",
+  "license": "MIT",
+  
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.2.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.0",
+    "sequelize": "^5.21.2",
+    "sequelize-cli": "^5.5.1"
+  },
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon src",
+    "db:migrate": "yarn sequelize-cli db:migrate",
+    "db:seed:all": "yarn sequelize-cli db:seed:all"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3",
+    "husky": "^3.0.9",
+    "lint-staged": "^10.0.0-1",
+    "prettier": "1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js)": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
