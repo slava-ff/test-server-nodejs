@@ -19,6 +19,7 @@ module.exports = express()
   .use(cors())
   .get("/meta/health", (req, res) => res.sendStatus(200))
   .use(bodyParser.json())
-  .use("/api", validateToken, routes)
+  // .use("/api", validateToken, routes)
+  .use("/api", routes)
   .use("/", staticHelper)
   .listen(PORT, () => console.log(`Server started on :${PORT}`));

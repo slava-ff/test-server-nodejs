@@ -1,13 +1,13 @@
 const db = require("../../models");
-const User = db.users;
+const User = db.user;
 const Op = db.Sequelize.Op;
 
-const createUser = (req, res) => {
-  const { username, password } = req.body;
+const createUser = async (req, res) => {
+  const { id, password } = req.body;
 
-  const user = { username, password };
+  const user = { id, password };
 
-  User.create(user)
+  await User.create(user)
     .then(data => {
       res.send(data);
     })
@@ -18,24 +18,24 @@ const createUser = (req, res) => {
     });
 };
 
-const findUser = (req, res) => {
-  const { username } = req.body;
+const findUser = async (req, res) => {
+  const { id } = req.body;
 
-  User.findByPk(username)
+  await User.findByPk(id)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving User with id=" + username
+        message: "Error retrieving User with id=" + id
       });
     });
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   const { id } = req.params;
 
-  User.destroy({
+  await User.destroy({
     where: { id: id }
   })
     .then(num => {
